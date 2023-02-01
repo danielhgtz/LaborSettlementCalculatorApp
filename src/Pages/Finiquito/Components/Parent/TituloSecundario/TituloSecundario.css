@@ -1,0 +1,11 @@
+.tituloSecundario {
+  font-family: "Raleway", sans-serif;
+
+  border-radius: 10px;
+  text-align: center;
+  width: 50%;
+  font-size: 40px;
+  align-items: center;
+
+  margin: 20px auto 0px;
+}
