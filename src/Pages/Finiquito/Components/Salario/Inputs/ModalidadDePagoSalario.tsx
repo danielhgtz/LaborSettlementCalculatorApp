@@ -32,7 +32,11 @@ export const ModalidadDePagoComponent = ({ ultimoDiaPorMes }: Props) => {
 
   return (
     <div>
-      <Radio.Group defaultValue="quincena" buttonStyle="solid">
+      <Radio.Group
+        defaultValue="quincena"
+        buttonStyle="solid"
+        value={seleccion}
+      >
         <Radio.Button
           value="quincena"
           id="quincena"

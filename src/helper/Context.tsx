@@ -1,3 +1,4 @@
+import moment from "moment";
 import { createContext, useContext, useState } from "react";
 
 /////////////////////////////////////////////////////////
@@ -5,6 +6,7 @@ import { createContext, useContext, useState } from "react";
 export const PrimeraFechaContext = createContext({
   primeraFechaContext: "",
   handlePrimeraFechaChange: (e: any) => {},
+  primeraFechaContextLetra: "",
 });
 // hook
 export const usePrimeraFecha = () => useContext(PrimeraFechaContext);
@@ -12,12 +14,20 @@ export const usePrimeraFecha = () => useContext(PrimeraFechaContext);
 // provider
 export const PrimeraFechaContextProvider = ({ children }: any) => {
   const [primeraFechaContext, setPrimeraFechaContext] = useState("");
+  const [primeraFechaContextLetra, setPrimeraFechaContextLetra] = useState("");
 
-  const handlePrimeraFechaChange = (e: any) => setPrimeraFechaContext(e);
+  const handlePrimeraFechaChange = (e: any) => {
+    setPrimeraFechaContext(e);
+    setPrimeraFechaContextLetra(moment(e).format("LL") + ".");
+  };
 
   return (
     <PrimeraFechaContext.Provider
-      value={{ primeraFechaContext, handlePrimeraFechaChange }}
+      value={{
+        primeraFechaContext,
+        handlePrimeraFechaChange,
+        primeraFechaContextLetra,
+      }}
     >
       {children}
     </PrimeraFechaContext.Provider>
@@ -29,6 +39,7 @@ export const PrimeraFechaContextProvider = ({ children }: any) => {
 export const SegundaFechaContext = createContext({
   segundaFechaContext: "",
   handleSegundaFechaChange: (e: any) => {},
+  segundaFechaContextLetra: "",
 });
 // hook
 export const useSegundaFecha = () => useContext(SegundaFechaContext);
@@ -36,12 +47,20 @@ export const useSegundaFecha = () => useContext(SegundaFechaContext);
 // provider
 export const SegundaFechaContextProvider = ({ children }: any) => {
   const [segundaFechaContext, setSegundaFechaContext] = useState("");
+  const [segundaFechaContextLetra, setSegundaFechaContextLetra] = useState("");
 
-  const handleSegundaFechaChange = (e: any) => setSegundaFechaContext(e);
+  const handleSegundaFechaChange = (e: any) => {
+    setSegundaFechaContext(e);
+    setSegundaFechaContextLetra(moment(e).format("LL") + ".");
+  };
 
   return (
     <SegundaFechaContext.Provider
-      value={{ segundaFechaContext, handleSegundaFechaChange }}
+      value={{
+        segundaFechaContext,
+        handleSegundaFechaChange,
+        segundaFechaContextLetra,
+      }}
     >
       {children}
     </SegundaFechaContext.Provider>
@@ -53,8 +72,9 @@ export const SegundaFechaContextProvider = ({ children }: any) => {
 // context
 export const SCDContext = createContext({
   salarioContext: 0,
+  setSalarioContext: (e: number) => {},
   SCD: 0,
-  handleSCDChange: (e: number, ultimoDiaPorMes: any) => {},
+  handleSCDChange: (ultimoDiaPorMes: any) => {},
   setSeleccion: (e: string) => {},
   seleccion: "",
   modalidadDePago: 0,
@@ -74,14 +94,14 @@ export const SCDContextProvider = ({ children }: any) => {
   const [modalidadDePago, setModalidadDePago] = useState(15);
   const [salarioPropContext, setSalarioPropContext] = useState<number>(0);
 
-  const handleSCDChange = (e: number, ultimoDiaPorMes: any) => {
-    setSalarioContext(e);
+  const handleSCDChange = (ultimoDiaPorMes: any) => {
     if (ultimoDiaPorMes) {
-      setSCD(e / ultimoDiaPorMes);
+      setSCD(salarioContext / ultimoDiaPorMes);
     } else {
-      setSCD(e / 30);
+      setSCD(salarioContext / 30);
     }
   };
+
   // const handleModalidadDePago = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setSelección(e.target.value);
   //   if (e.target.value === "mes") {
@@ -97,6 +117,7 @@ export const SCDContextProvider = ({ children }: any) => {
     <SCDContext.Provider
       value={{
         salarioContext,
+        setSalarioContext,
         SCD,
         handleSCDChange,
         setSeleccion,
@@ -221,6 +242,8 @@ export const PrimaDeAntiguedadContextProvider = ({ children }: any) => {
 export const FondoDeAhorroContext = createContext({
   booleanFA: false,
   setBooleanFA: (e: boolean) => {},
+  value: 0,
+  setValue: (e: number) => {},
   fondoDeAhorroProporcional: 0,
   setFondoDeAhorroProporcional: (e: number) => {},
   fondoDeAhorroPorcentaje: 0,
@@ -231,6 +254,7 @@ export const useFondoDeAhorro = () => useContext(FondoDeAhorroContext);
 
 export const FondoDeAhorroContextProvider = ({ children }: any) => {
   const [booleanFA, setBooleanFA] = useState<boolean>(false);
+  const [value, setValue] = useState<number>(0);
   const [fondoDeAhorroProporcional, setFondoDeAhorroProporcional] = useState(0);
   const [fondoDeAhorroPorcentaje, setFondoDeAhorroPorcentaje] = useState<any>();
 
@@ -239,6 +263,8 @@ export const FondoDeAhorroContextProvider = ({ children }: any) => {
       value={{
         booleanFA,
         setBooleanFA,
+        value,
+        setValue,
         fondoDeAhorroProporcional,
         setFondoDeAhorroProporcional,
         fondoDeAhorroPorcentaje,

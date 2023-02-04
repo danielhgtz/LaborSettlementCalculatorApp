@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSCD } from "../../../../../helper/Context";
 import { InputNumber } from "antd";
 
@@ -7,19 +7,18 @@ type Props = {
 };
 
 export const InputSalario = ({ ultimoDiaPorMes }: Props) => {
-  const [salario, setSalario] = useState<number>(0);
-  const { handleSCDChange } = useSCD();
+  const { handleSCDChange, salarioContext, setSalarioContext } = useSCD();
 
   const onChangeSalary = (e: any) => {
-    setSalario(parseInt(e));
+    setSalarioContext(parseInt(e));
   };
 
   useEffect(() => {
-    handleSCDChange(salario, ultimoDiaPorMes);
-    if (!salario) {
-      setSalario(0);
+    handleSCDChange(ultimoDiaPorMes);
+    if (!salarioContext) {
+      setSalarioContext(0);
     }
-  }, [salario, ultimoDiaPorMes]);
+  }, [salarioContext, ultimoDiaPorMes]);
 
   return (
     <div>
@@ -27,9 +26,10 @@ export const InputSalario = ({ ultimoDiaPorMes }: Props) => {
       <InputNumber
         prefix="$"
         style={{ width: "100%" }}
-        min="0"
+        min={0}
         formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         onChange={onChangeSalary}
+        value={salarioContext}
       />
     </div>
   );

@@ -5,6 +5,7 @@ import "./InstructionsMessage.css";
 export const InstructionsMessage = () => {
   const { number } = useStepper();
   const [intructionMessage, setInstructionMessage] = useState<string>();
+  const [optionalAsterisk, setOptionalAsterisk] = useState<string>("");
 
   useEffect(() => {
     if (number === 0) {
@@ -16,9 +17,7 @@ export const InstructionsMessage = () => {
     } else if (number === 3) {
       setInstructionMessage("Ingresa los días de Aguinaldo que te pagarán:");
     } else if (number === 4) {
-      setInstructionMessage(
-        "Ingresa el porcentaje de Fondo de Ahorro con el que cuentes (opcional):"
-      );
+      setInstructionMessage("Ingresa tu porcentaje de Fondo de Ahorro:");
     } else if (number === 5) {
       setInstructionMessage(
         "Ingresa alguna Prestación Adicional con la que cuentes:"
@@ -26,11 +25,20 @@ export const InstructionsMessage = () => {
     } else {
       setInstructionMessage("");
     }
+
+    if (number === 4 || number === 5) {
+      setOptionalAsterisk("*");
+    } else {
+      setOptionalAsterisk("");
+    }
   }, [number]);
 
   return (
     <div className="instructionMessageBox">
-      <p>{intructionMessage}</p>
+      <span>
+        <p className="optionalAsterisk">{optionalAsterisk}</p>
+        <p>{intructionMessage}</p>
+      </span>
     </div>
   );
 };

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { CalendarInput } from "./CalendarInput";
-
 import { usePrimeraFecha, useSegundaFecha } from "../../../../helper/Context";
 import "./Calendar.css";
 
@@ -9,15 +8,28 @@ import "./Calendar.css";
 const Calendar = () => {
   const [primeraFecha, setPrimeraFecha] = useState<Date | string>("");
   const [segundaFecha, setSegundaFecha] = useState<Date | string>("");
-  const { primeraFechaContext, handlePrimeraFechaChange } = usePrimeraFecha();
-  const { segundaFechaContext, handleSegundaFechaChange } = useSegundaFecha();
+  const {
+    primeraFechaContext,
+    primeraFechaContextLetra,
+    handlePrimeraFechaChange,
+  } = usePrimeraFecha();
+
+  const {
+    segundaFechaContext,
+    segundaFechaContextLetra,
+    handleSegundaFechaChange,
+  } = useSegundaFecha();
 
   useEffect(() => {
-    handlePrimeraFechaChange(primeraFecha);
+    if (primeraFecha) {
+      handlePrimeraFechaChange(primeraFecha);
+    }
   }, [primeraFecha]);
 
   useEffect(() => {
-    handleSegundaFechaChange(segundaFecha);
+    if (segundaFecha) {
+      handleSegundaFechaChange(segundaFecha);
+    }
   }, [segundaFecha]);
 
   return (
@@ -25,15 +37,18 @@ const Calendar = () => {
       <div className="boxFechaDeEntrada">
         <CalendarInput
           titulo="Fecha de Entrada"
-          fecha={primeraFecha}
           setFecha={setPrimeraFecha}
+          msgContext={primeraFechaContextLetra}
+          fechaContext={primeraFechaContext}
         />
       </div>
+
       <div className="boxFechaDeSalida">
         <CalendarInput
           titulo="Fecha de Salida"
-          fecha={segundaFecha}
           setFecha={setSegundaFecha}
+          msgContext={segundaFechaContextLetra}
+          fechaContext={segundaFechaContext}
         />
       </div>
     </div>

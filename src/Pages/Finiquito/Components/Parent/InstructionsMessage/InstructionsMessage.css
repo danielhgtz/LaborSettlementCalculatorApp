@@ -18,6 +18,11 @@
   backdrop-filter: blur(1px);
 }
 
-.instructionMessageBox {
+.instructionMessageBox p {
   font-size: 20px;
+  display: inline;
+}
+
+.optionalAsterisk {
+  color: red;
 }
