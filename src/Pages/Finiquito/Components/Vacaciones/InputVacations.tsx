@@ -5,16 +5,18 @@ import { useVacation } from "../../../../helper/Context";
 import "./InputVacations.css";
 
 export const InputVacations = () => {
-  const [diasDeVacaciones, setDiasDeVacaciones] = useState(0);
-  const { handleVacationChange } = useVacation();
+  //const [diasDeVacaciones, setDiasDeVacaciones] = useState(0);
+  const { vacationDays, onChangeDay } = useVacation();
 
-  const onChangeDay = (e: any) => {
-    setDiasDeVacaciones(e);
-  };
+  // const onChangeDay = (e: any) => {
+  //   setDiasDeVacaciones(e);
+  // };
 
-  useEffect(() => {
-    handleVacationChange(diasDeVacaciones);
-  }, [diasDeVacaciones]);
+  // useEffect(() => {
+  //   if (diasDeVacaciones) {
+  //     handleVacationChange(diasDeVacaciones);
+  //   }
+  // }, [diasDeVacaciones]);
 
   return (
     <div className="mainVacationsDiv">
@@ -23,10 +25,11 @@ export const InputVacations = () => {
         <InputNumber
           className="inputNumberVacations"
           type="number"
-          min="0"
-          max="365"
+          min={0}
+          max={365}
           placeholder="Ex. 0"
           onChange={onChangeDay}
+          value={vacationDays}
         />
       </div>
     </div>

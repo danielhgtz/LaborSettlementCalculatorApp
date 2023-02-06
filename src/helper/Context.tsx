@@ -149,7 +149,7 @@ export const useAguinaldo = () => useContext(AguinaldoContext);
 
 // provider
 export const AguinaldoContextProvider = ({ children }: any) => {
-  const [aguinaldoContext, setAguinaldoContext] = useState(0);
+  const [aguinaldoContext, setAguinaldoContext] = useState<any>();
   const [diasAguinaldoProporcional, setDiasAguinaldoProporcional] = useState(0);
   const [aguinaldoProporcional, setAguinaldoProporcional] = useState(0);
 
@@ -179,7 +179,7 @@ export const AguinaldoContextProvider = ({ children }: any) => {
 export const VacationContext = createContext({
   vacationDays: 0,
   proportionalVacationResult: 0,
-  handleVacationChange: (e: any) => {},
+  onChangeDay: (e: any) => {},
   setProportionalVacationResult: (e: any) => {},
   primaVacacional: 0,
   setPrimaVacacional: (e: number) => {},
@@ -190,19 +190,19 @@ export const useVacation = () => useContext(VacationContext);
 
 // provider
 export const VacationContextProvider = ({ children }: any) => {
-  const [vacationDays, setVacationDays] = useState<number>(0);
+  const [vacationDays, setVacationDays] = useState<any>();
   const [proportionalVacationResult, setProportionalVacationResult] =
     useState(0);
   const [primaVacacional, setPrimaVacacional] = useState(0);
 
-  const handleVacationChange = (e: number) => setVacationDays(e);
+  const onChangeDay = (e: number) => setVacationDays(e);
 
   return (
     <VacationContext.Provider
       value={{
         vacationDays,
         proportionalVacationResult,
-        handleVacationChange,
+        onChangeDay,
         setProportionalVacationResult,
         primaVacacional,
         setPrimaVacacional,
@@ -277,6 +277,34 @@ export const FondoDeAhorroContextProvider = ({ children }: any) => {
 };
 
 ///////////////////////////////////////////////
+export const ExtrasContext = createContext({
+  globalIndex: 0,
+  setGlobalIndex: (e: number) => {},
+  formValuesTotal: [{ "": "" }],
+  setFormValuesTotal: (param1: any, param2: any) => {},
+});
+
+export const useExtras = () => useContext(ExtrasContext);
+
+export const ExtrasProvider = ({ children }: any) => {
+  const [globalIndex, setGlobalIndex] = useState<number>(0);
+  const [formValuesTotal, setFormValuesTotal] = useState<any>([{}]);
+
+  return (
+    <ExtrasContext.Provider
+      value={{
+        globalIndex,
+        setGlobalIndex,
+        formValuesTotal,
+        setFormValuesTotal,
+      }}
+    >
+      {children}
+    </ExtrasContext.Provider>
+  );
+};
+
+/////////////////////////////////////////////////
 export const StepperContext = createContext({
   number: 0,
   setNumber: (e: number) => {},

@@ -6,6 +6,8 @@ import {
 } from "../../../../Utilities/Utilities";
 import { InputsPrestacionAdicional } from "./InputsPrestacionAdicional";
 import { Button } from "antd";
+import "./Extritos.css";
+
 type Props = {
   ultimoDia: number;
   ultimoDiaPorMes: number;
@@ -33,11 +35,13 @@ export const Extrito = ({
     Record<string, number>
   >({});
   const { segundaFechaContext } = useSegundaFecha();
+  //!const { globalIndex, setGlobalIndex } = useExtras();
 
   let nuevaFormValues: any = [...formValues];
   let ShowMinus: boolean = true;
   let ShowPlus: boolean = true;
   let diasTrabajados: any;
+
   const add = () => {
     setFormValues([...formValues, { name: "", amount: 0 }]);
     const nuevosResultados: any = [...resultados, []];
@@ -58,12 +62,11 @@ export const Extrito = ({
     null,
     null
   );
+
   const mitadDeAño = diasAlAñoSegundaFecha / 2;
   const mitad: Date = new Date(ultimoAño, 6, 2);
 
   let diasAlSemestre: number;
-
-  // console.log(formValues, resultados);
 
   if (formValues.length === 0) {
     ShowMinus = false;
@@ -94,11 +97,6 @@ export const Extrito = ({
         let acumuladoMes = mes * diasDePago;
         acumuladoMes = parseFloat(acumuladoMes.toFixed(2));
 
-        // setTotalesAcumulados({
-        //   ...totalesAcumulados,
-        //   [resultados[index]]: acumuladoMes,
-        // });
-
         return "$" + mes + " por Día. $" + acumuladoMes + " Acumulado.";
       } else if (resultados[index] === "quincena") {
         let quincena = formValues[index].amount / 15;
@@ -107,12 +105,6 @@ export const Extrito = ({
 
         let acumuladoQuincena = quincena * diasDePago;
         acumuladoQuincena = parseFloat(acumuladoQuincena.toFixed(2));
-
-        // setTotalesAcumulados({
-        //   ...totalesAcumulados,
-        //   [resultados[index]]: acumuladoQuincena,
-        // });
-
         return (
           "$" + quincena + " por Día. $" + acumuladoQuincena + " Acumulado."
         );
@@ -122,11 +114,6 @@ export const Extrito = ({
 
         let acumuladoSemestre = semestre * diasAlSemestre;
         acumuladoSemestre = parseFloat(acumuladoSemestre.toFixed(2));
-
-        // setTotalesAcumulados({
-        //   ...totalesAcumulados,
-        //   [resultados[index]]: acumuladoSemestre,
-        // });
 
         return (
           "$" + semestre + " por Día. $" + acumuladoSemestre + " Acumulado."
@@ -138,19 +125,12 @@ export const Extrito = ({
         let acumuladoAno = ano * diasTrabajadosUltimoAño;
         acumuladoAno = parseFloat(acumuladoAno.toFixed(2));
 
-        // setTotalesAcumulados({
-        //   ...totalesAcumulados,
-        //   [resultados[index]]: acumuladoAno,
-        // });
         return "$" + ano + " por Día. $" + acumuladoAno + " Acumulado.";
       }
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleChange = (e: any, index: number) => {
     nuevaFormValues[index][e.target.name] = e.target.value;
     setFormValues(nuevaFormValues);
   };
@@ -160,29 +140,68 @@ export const Extrito = ({
     index: number
   ) => {
     const inputData = [...resultados];
-    inputData[index] = e.target.value;
+    inputData[index] = e;
     setResultados(inputData);
   };
 
+  const handleChangeInputNumber = (e: any, index: number) => {
+    nuevaFormValues[index].amount = e;
+    setFormValues(nuevaFormValues);
+  };
+
   return (
-    <div>
-      Prestación Adicional:
-      {formValues.map((e: any, index: number) => {
-        return (
-          <div key={index}>
-            <InputsPrestacionAdicional
-              index={index}
-              handleChange={handleChange}
-              handleChangeSelect={handleChangeSelect}
-              showMinus={ShowMinus}
-              remove={remove}
-              palabra={palabra}
-              cantidad={cantidad}
-            />
+    <div className="mainExtrasDiv">
+      <div className="boxInputExtras">
+        <h4 className="tituloPrestacionAdicional">Prestación Adicional:</h4>
+        {ShowMinus ? (
+          <div className="mapExtras">
+            {formValues.map((e: any, index: number) => {
+              return (
+                <div className="mapDivExtras" key={index}>
+                  <span className="indexNumber">{index + 1 + ". "}</span>
+                  <InputsPrestacionAdicional
+                    index={index}
+                    handleChange={handleChange}
+                    handleChangeSelect={handleChangeSelect}
+                    handleChangeInputNumber={handleChangeInputNumber}
+                    showMinus={ShowMinus}
+                    remove={remove}
+                    palabra={palabra}
+                    cantidad={cantidad}
+                  />
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
-      {ShowPlus ? <Button onClick={add}>+</Button> : null}
+        ) : null}
+
+        <div className="plusButtonDiv">
+          {ShowPlus ? (
+            <Button className="plusButton" onClick={add}>
+              +
+            </Button>
+          ) : null}
+        </div>
+      </div>
+      {ShowMinus ? (
+        <div className="resultsExtritos">
+          <h4 className="tituloResultados"> Results:</h4>
+          <div className="resultExtras">
+            {formValues.map((e: any, index: any) => {
+              return (
+                <div className="palabra" key={index}>
+                  <p className="resultados">
+                    <p>
+                      {index + 1 + ".-" + " " + palabra(index)}{" "}
+                      {cantidad(index)}
+                    </p>
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

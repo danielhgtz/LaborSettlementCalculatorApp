@@ -7,6 +7,7 @@ import {
   AguinaldoContextProvider,
   PrimaDeAntiguedadContextProvider,
   FondoDeAhorroContextProvider,
+  ExtrasProvider,
   StepperContextProvider,
 } from "./helper/Context";
 
@@ -24,7 +25,9 @@ root.render(
             <AguinaldoContextProvider>
               <PrimaDeAntiguedadContextProvider>
                 <FondoDeAhorroContextProvider>
-                  <App />
+                  <ExtrasProvider>
+                    <App />
+                  </ExtrasProvider>
                 </FondoDeAhorroContextProvider>
               </PrimaDeAntiguedadContextProvider>
             </AguinaldoContextProvider>

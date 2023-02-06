@@ -1,19 +1,18 @@
-//?Modularización del div del componente de extras
-import { Button } from "antd";
+//?Modularización del div del componente de extritos
+import { Button, InputNumber, Input, Select } from "antd";
+import "./Extritos.css";
+
 export const InputsPrestacionAdicional = ({
   handleChange,
   handleChangeSelect,
+  handleChangeInputNumber,
   index,
   showMinus,
   remove,
-  palabra,
-  cantidad,
 }: {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-  handleChangeSelect: (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    index: number
-  ) => void;
+  handleChange: (e: any, index: number) => void;
+  handleChangeSelect: (e: any, index: number) => void;
+  handleChangeInputNumber: (e: any, index: number) => void;
   index: number;
   showMinus: boolean;
   remove: (index: number) => void;
@@ -21,36 +20,38 @@ export const InputsPrestacionAdicional = ({
   cantidad: (index: number) => string | undefined;
 }) => {
   return (
-    <div>
-      <input
+    <div className="mapLine">
+      <Input
+        className="firstInput"
         type="text"
         name="name"
-        placeholder="Nombre de la Prestación"
+        maxLength={30}
+        placeholder="Ej. Gasolina"
         onChange={(e) => handleChange(e, index)}
       />
-      <select
-        defaultValue={"DEFAULT"}
+      <Select
+        className="select"
+        placeholder="Escoge forma de prestación"
         onChange={(e) => handleChangeSelect(e, index)}
       >
-        <option value="DEFAULT" disabled>
-          Escoge forma de prestación
-        </option>
-        <option value="mes">Al Mes</option>
-        <option value="quincena">A los 15 Días</option>
-        <option value="semestre">Al Semestre</option>
-        <option value="año">Al Año</option>
-      </select>
-      <input
+        <Select.Option className="select1" value="mes">
+          Al Mes
+        </Select.Option>
+        <Select.Option value="quincena">A los 15 Días</Select.Option>
+        <Select.Option value="semestre">Al Semestre</Select.Option>
+        <Select.Option value="año">Al Año</Select.Option>
+      </Select>
+      <InputNumber
         className="containerDiv "
-        min="0"
+        min={0}
         type="number"
         placeholder="$$"
-        prefix="$"
         name="amount"
-        onChange={(e) => handleChange(e, index)}
+        onChange={(e) => handleChangeInputNumber(e, index)}
       />
       {showMinus ? (
         <Button
+          className="minusButton"
           onClick={() => {
             remove(index);
           }}
@@ -58,7 +59,6 @@ export const InputsPrestacionAdicional = ({
           -
         </Button>
       ) : null}
-      {palabra(index)} {cantidad(index)}
     </div>
   );
 };

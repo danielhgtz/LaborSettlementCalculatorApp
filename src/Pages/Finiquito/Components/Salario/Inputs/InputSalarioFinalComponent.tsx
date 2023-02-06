@@ -1,4 +1,3 @@
-import React from "react";
 import { InputSalario } from "./InputSalario";
 import { ModalidadDePagoComponent } from "./ModalidadDePagoSalario";
 import "./Salario.css";

@@ -66,7 +66,7 @@ export const StepperControl = () => {
         setLeftButtonBoolean(true);
       }
     } else if (number === 3) {
-      if (aguinaldoContext) {
+      if (aguinaldoContext >= 0) {
         setRightButtonBoolean(true);
       } else {
         setRightButtonBoolean(false);

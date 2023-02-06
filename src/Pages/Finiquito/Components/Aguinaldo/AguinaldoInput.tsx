@@ -13,10 +13,11 @@ export const InputAguinaldo = () => {
         <InputNumber
           className="inputNumberAguinaldo"
           type="number"
-          min="15"
-          max="365"
+          min={0}
+          max={365}
           placeholder="Ex. 15"
           onChange={onChangeAguinaldo}
+          value={aguinaldoContext}
         />
       </div>
     </div>
