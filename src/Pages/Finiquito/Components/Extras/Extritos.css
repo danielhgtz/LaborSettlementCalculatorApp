@@ -1,3 +1,4 @@
+/* Component Extritos */
 .mainExtrasDiv {
   font-family: "Raleway", sans-serif;
   border-radius: 10px;
@@ -37,7 +38,8 @@
 .tituloPrestacionAdicional {
   margin: 0%;
 }
-.mapExtras {
+
+.mapFxExtras {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -55,6 +57,26 @@
   justify-content: space-evenly;
 }
 
+.mapLineExtras {
+  font-size: 100%;
+  width: 100%;
+  height: 34px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0%;
+}
+
+.mapIndexNumber {
+  margin-left: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30.4px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
 .plusButtonDiv {
   width: 60%;
   justify-content: center;
@@ -70,69 +92,11 @@
   bottom: 0%;
 }
 
-.mapDivExtras {
-  font-size: 100%;
-  width: 100%;
-  height: 34px;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0%;
-}
-
-.indexNumber {
-  margin-left: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30.4px;
-  font-size: 15px;
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-.mapLine {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.firstInput {
-  font-size: 60%;
-  width: 25%;
-  height: 32px;
-}
-
-.select {
-  width: 189.175px;
-}
-
-.select1 {
-  font-size: 2px;
-}
-
-.containerDiv {
-  width: 15%;
-  height: 32px;
-  padding: 0px;
-  border: 0px;
-  font-size: 10px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
 .plusButton {
   position: inherit;
 }
-.minusButton {
-  height: 32px;
-  width: 20px;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
 
-.resultsExtritos {
+.mainResultsExtrasDiv {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -148,11 +112,13 @@
   position: relative;
 }
 
-.resultExtras {
+.tituloResultados {
+  margin: 0%;
+}
+
+.resultsExtrasInnerDiv {
   width: 100%;
   height: 100%;
-
-  /* background-color: rgb(62, 43, 43); */
   padding: 10px 0px 0px 0px;
 
   flex-direction: column;
@@ -163,7 +129,7 @@
   display: flex;
 }
 
-.palabra {
+.extraMainResults {
   font-size: 10px;
   margin: 0%;
   font-weight: bold;
@@ -193,17 +159,39 @@
   margin-top: 0%;
 }
 
-.resultados {
-  align-items: center;
-  text-align: left;
-  left: 0%;
-  margin: auto;
-  align-items: center;
-  align-content: center;
+/*Component Input Prestación Adicional  */
+
+.mapLine {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
-.tituloResultados {
-  margin: 0%;
+.firstInput {
+  font-size: 60%;
+  width: 25%;
+  height: 32px;
+}
+
+.select {
+  width: 189.175px;
+}
+
+.inputNumber {
+  width: 15%;
+  height: 32px;
+  padding: 0px;
+  border: 0px;
+  font-size: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.minusButton {
+  height: 32px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }

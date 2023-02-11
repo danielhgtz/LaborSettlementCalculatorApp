@@ -5,7 +5,10 @@ import {
   usePrimeraFecha,
   useSegundaFecha,
 } from "../../../../helper/Context";
-import { ParseFloatToTwoDecimals } from "../../../../Utilities/Utilities";
+import {
+  ParseFloatToTwoDecimals,
+  ParseFloatTwoDecimalsNumber,
+} from "../../../../Utilities/Utilities";
 
 export const AguinaldoOperations = ({
   diasTrabajadosUltimoAño,
@@ -21,19 +24,24 @@ export const AguinaldoOperations = ({
   const { SCD } = useSCD();
   const { primeraFechaContext } = usePrimeraFecha();
   const { segundaFechaContext } = useSegundaFecha();
+  let diasAguinaldoMensaje: string = " Días.";
 
   useEffect(() => {
     if (primeraFechaContext && segundaFechaContext && SCD && aguinaldoContext) {
       setDiasAguinaldoProporcional(
-        (aguinaldoContext / diasAlAñoSegundaFecha) * diasTrabajadosUltimoAño
-      );
-      setAguinaldoProporcional(
-        (aguinaldoContext / diasAlAñoSegundaFecha) *
-          diasTrabajadosUltimoAño *
-          SCD
+        ParseFloatTwoDecimalsNumber(
+          (aguinaldoContext / diasAlAñoSegundaFecha) * diasTrabajadosUltimoAño
+        )
       );
     }
-  }, [primeraFechaContext, segundaFechaContext, SCD, aguinaldoContext]);
+    setAguinaldoProporcional(diasAguinaldoProporcional * SCD);
+  }, [
+    primeraFechaContext,
+    segundaFechaContext,
+    SCD,
+    aguinaldoContext,
+    diasAguinaldoProporcional,
+  ]);
 
   const resultadoDiasAguinaldoProporcional = ParseFloatToTwoDecimals(
     diasAguinaldoProporcional
@@ -42,13 +50,19 @@ export const AguinaldoOperations = ({
     aguinaldoProporcional
   );
 
+  if (aguinaldoContext === 1) {
+    diasAguinaldoMensaje = " Día.";
+  }
+
   return (
     <div>
-      <p>Dìas totales de aguinaldo: {aguinaldoContext}</p>
       <p>
-        Días de Aguinaldo Proporcional: {resultadoDiasAguinaldoProporcional}
+        Días de Aguinaldo: {aguinaldoContext} {diasAguinaldoMensaje}
       </p>
-      <p>Aguinaldo Proporcional: {resultadoAguinaldoProporcional}</p>
+      <p>
+        Días de Aguinaldo Proporcional: {resultadoDiasAguinaldoProporcional}.
+      </p>
+      <p>Monto de Aguinaldo Proporcional: ${resultadoAguinaldoProporcional}.</p>
     </div>
   );
 };

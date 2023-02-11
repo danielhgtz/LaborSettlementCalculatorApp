@@ -7,6 +7,8 @@ import {
   useFondoDeAhorro,
 } from "../../../../helper/Context";
 import { ParseFloatToTwoDecimals } from "../../../../Utilities/Utilities";
+import "./Total.css";
+
 export const Total = () => {
   const [totalAddition, setTotalAddition] = useState<any>();
   const {
@@ -47,7 +49,7 @@ export const Total = () => {
 
   return (
     <div>
-      <h1>Acumulado: ${resultadoTotal}</h1>
+      <h1 className="totalAmount"> $ {resultadoTotal}</h1>
     </div>
   );
 };

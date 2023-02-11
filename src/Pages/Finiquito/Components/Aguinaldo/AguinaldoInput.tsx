@@ -9,7 +9,7 @@ export const InputAguinaldo = () => {
   return (
     <div className="mainAguinaldoDiv">
       <div className="boxInputAguinaldo">
-        <h4>Días totales de Aguinaldo:</h4>
+        <h4>N° de Días de Aguinaldo al Año:</h4>
         <InputNumber
           className="inputNumberAguinaldo"
           type="number"

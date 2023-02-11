@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useVacation,
   useSCD,
   usePrimeraFecha,
   useSegundaFecha,
 } from "../../../../helper/Context";
-import { ParseFloatToTwoDecimals } from "../../../../Utilities/Utilities";
+import {
+  ParseFloatTwoDecimalsNumber,
+  ParseFloatToTwoDecimals,
+} from "../../../../Utilities/Utilities";
 
 export const VacationOperations = ({
   diasAlAñoSegundaFecha,
@@ -21,18 +24,20 @@ export const VacationOperations = ({
   const { SCD } = useSCD();
   const { primeraFechaContext } = usePrimeraFecha();
   const { segundaFechaContext } = useSegundaFecha();
-  let vacacionesProporcionales: number | undefined = 0;
+
+  let vacacionesProporcionales: number = 0;
+  let diasVacacionesMensaje: string = "Dias";
 
   if (primeraFechaContext && segundaFechaContext && SCD && vacationDays) {
-    vacacionesProporcionales =
-      (vacationDays / diasAlAñoSegundaFecha) * diasTrabajadosUltimoAño;
+    vacacionesProporcionales = ParseFloatTwoDecimalsNumber(
+      (vacationDays / diasAlAñoSegundaFecha) * diasTrabajadosUltimoAño
+    );
   }
+
   useEffect(() => {
-    if (vacacionesProporcionales) {
-      setProportionalVacationResult(vacacionesProporcionales * SCD);
-      setPrimaVacacional(proportionalVacationResult * 0.25);
-    }
-  }, [vacacionesProporcionales]);
+    setProportionalVacationResult(vacacionesProporcionales * SCD);
+    setPrimaVacacional(proportionalVacationResult * 0.25);
+  }, [vacacionesProporcionales, proportionalVacationResult, vacationDays]);
 
   const diasDeVacacionesProporcionales = ParseFloatToTwoDecimals(
     vacacionesProporcionales
@@ -44,12 +49,25 @@ export const VacationOperations = ({
 
   const resultadoPrimaVacacional = ParseFloatToTwoDecimals(primaVacacional);
 
+  if (vacationDays === 1) {
+    diasVacacionesMensaje = "Día";
+  } else {
+    diasVacacionesMensaje = "Días";
+  }
+
   return (
     <div>
-      <p>Vacaciones: {vacationDays}</p>
-      <p>Días de Vacaciones Proporcionales {diasDeVacacionesProporcionales}</p>
-      <p>Vacaciones Proporcionales: ${resultadoVacacionesProporcionales}</p>
-      <p>Prima Vacacional: ${resultadoPrimaVacacional}</p>
+      <p>
+        Vacaciones al año: {vacationDays} {diasVacacionesMensaje}.
+      </p>
+      <p>
+        Días de Vacaciones Proporcionales: {diasDeVacacionesProporcionales}.
+      </p>
+      <p>
+        Monto de Vacaciones Proporcionales: ${resultadoVacacionesProporcionales}
+        .
+      </p>
+      <p>Prima Vacacional: ${resultadoPrimaVacacional}.</p>
     </div>
   );
 };

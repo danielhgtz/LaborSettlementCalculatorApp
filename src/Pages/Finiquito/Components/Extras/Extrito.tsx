@@ -154,11 +154,11 @@ export const Extrito = ({
       <div className="boxInputExtras">
         <h4 className="tituloPrestacionAdicional">Prestación Adicional:</h4>
         {ShowMinus ? (
-          <div className="mapExtras">
+          <div className="mapFxExtras">
             {formValues.map((e: any, index: number) => {
               return (
-                <div className="mapDivExtras" key={index}>
-                  <span className="indexNumber">{index + 1 + ". "}</span>
+                <div className="mapLineExtras" key={index}>
+                  <span className="mapIndexNumber">{index + 1 + ". "}</span>
                   <InputsPrestacionAdicional
                     index={index}
                     handleChange={handleChange}
@@ -184,17 +184,14 @@ export const Extrito = ({
         </div>
       </div>
       {ShowMinus ? (
-        <div className="resultsExtritos">
+        <div className="mainResultsExtrasDiv">
           <h4 className="tituloResultados"> Results:</h4>
-          <div className="resultExtras">
+          <div className="resultsExtrasInnerDiv">
             {formValues.map((e: any, index: any) => {
               return (
-                <div className="palabra" key={index}>
-                  <p className="resultados">
-                    <p>
-                      {index + 1 + ".-" + " " + palabra(index)}{" "}
-                      {cantidad(index)}
-                    </p>
+                <div className="extraMainResults" key={index}>
+                  <p>
+                    {index + 1 + ".-" + " " + palabra(index)} {cantidad(index)}
                   </p>
                 </div>
               );

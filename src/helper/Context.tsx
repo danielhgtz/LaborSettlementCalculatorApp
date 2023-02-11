@@ -81,6 +81,8 @@ export const SCDContext = createContext({
   setModalidadDePago: (e: number) => {},
   salarioPropContext: 0,
   setSalarioPropContext: (e: number) => {},
+  salarioRestanteFondoDeAhorro: "",
+  setSalarioRestanteFondoDeAhorro: (e: string) => {},
 });
 
 // hook
@@ -93,6 +95,8 @@ export const SCDContextProvider = ({ children }: any) => {
   const [seleccion, setSeleccion] = useState("quincena");
   const [modalidadDePago, setModalidadDePago] = useState(15);
   const [salarioPropContext, setSalarioPropContext] = useState<number>(0);
+  const [salarioRestanteFondoDeAhorro, setSalarioRestanteFondoDeAhorro] =
+    useState<string>("");
 
   const handleSCDChange = (ultimoDiaPorMes: any) => {
     if (ultimoDiaPorMes) {
@@ -126,6 +130,8 @@ export const SCDContextProvider = ({ children }: any) => {
         setModalidadDePago,
         salarioPropContext,
         setSalarioPropContext,
+        salarioRestanteFondoDeAhorro,
+        setSalarioRestanteFondoDeAhorro,
       }}
     >
       {children}
@@ -224,7 +230,7 @@ export const usePrimaDeAntiguedad = () => useContext(PrimaDeAntiguedadContext);
 
 // provider
 export const PrimaDeAntiguedadContextProvider = ({ children }: any) => {
-  const [totalDineroPrima, setTotalDineroPrima] = useState(0);
+  const [totalDineroPrima, setTotalDineroPrima] = useState<number>(0);
 
   return (
     <PrimaDeAntiguedadContext.Provider

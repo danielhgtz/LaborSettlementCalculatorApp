@@ -21,7 +21,7 @@ export const InputVacations = () => {
   return (
     <div className="mainVacationsDiv">
       <div className="boxInputVacations">
-        <h4>N° de Vacaciones restantes / totales</h4>
+        <h4>N° de Días de Vacaciones al Año:</h4>
         <InputNumber
           className="inputNumberVacations"
           type="number"

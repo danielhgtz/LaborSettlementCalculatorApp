@@ -28,7 +28,7 @@ export const CalendarTotalTime = ({ años, meses, dias }: any) => {
   }
 
   if (primeraFechaContext && segundaFechaContext) {
-    calendarTotalTime = `${años} ${mensajeAños}, ${meses} ${mensajeMeses} y ${dias} ${mensajeDias}`;
+    calendarTotalTime = `${años} ${mensajeAños}, ${meses} ${mensajeMeses} y ${dias} ${mensajeDias}.`;
   }
 
   return (

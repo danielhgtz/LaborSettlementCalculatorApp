@@ -19,7 +19,7 @@ import "./Parent.css";
 
 import { TituloSecundario } from "./TituloSecundario/TituloSecundario";
 
-import { CompilerStepsAndResults } from "./CompilerStepsAndResults/CompilerSteps";
+import { CompilerStepsAndResults } from "./CompilerStepsAndResults/CompilerSteps/CompilerSteps";
 import { InstructionsMessage } from "./InstructionsMessage/InstructionsMessage";
 
 const ParentFiniquito = () => {

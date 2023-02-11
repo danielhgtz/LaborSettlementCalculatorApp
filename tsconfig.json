@@ -16,5 +16,11 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/Pages/Finiquito/Components/FondoDeAhorro/.tsx"]
+
+  "include": [
+    "src/declaration.d.ts",
+    "src/declaration.d.ts",
+    "src",
+    "src/Pages/Finiquito/Components/FondoDeAhorro/.tsx"
+  ]
 }

@@ -34,15 +34,13 @@ export const InputsPrestacionAdicional = ({
         placeholder="Escoge forma de prestación"
         onChange={(e) => handleChangeSelect(e, index)}
       >
-        <Select.Option className="select1" value="mes">
-          Al Mes
-        </Select.Option>
+        <Select.Option value="mes">Al Mes</Select.Option>
         <Select.Option value="quincena">A los 15 Días</Select.Option>
         <Select.Option value="semestre">Al Semestre</Select.Option>
         <Select.Option value="año">Al Año</Select.Option>
       </Select>
       <InputNumber
-        className="containerDiv "
+        className="inputNumber "
         min={0}
         type="number"
         placeholder="$$"

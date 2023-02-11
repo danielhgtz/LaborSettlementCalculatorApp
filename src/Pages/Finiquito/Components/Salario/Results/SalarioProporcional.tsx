@@ -90,15 +90,17 @@ export const SalarioProporcional = ({
     if (segundaFechaContext && salarioContext) {
       if (modalidadDePago === 15) {
         setSalarioPropContext(diasTrabajadosQuincena * SCD);
-        setMensaje(`${diasTrabajadosQuincena} ${diasMessage} de la Quincena.`);
+        setMensaje(
+          `Por ${diasTrabajadosQuincena} ${diasMessage} de la Quincena.`
+        );
       } else if (modalidadDePago === 7) {
         setSalarioPropContext(totalDiasTrabajadosPorSemana * SCD);
         setMensaje(
-          `${totalDiasTrabajadosPorSemana} ${diasMessage} de la Semana.`
+          `Por ${totalDiasTrabajadosPorSemana} ${diasMessage} de la Semana.`
         );
       } else if (modalidadDePago === ultimoDiaPorMes) {
         setSalarioPropContext(totalDiasTrabajadosPorMes * SCD);
-        setMensaje(`${totalDiasTrabajadosPorMes} ${diasMessage} del Mes.`);
+        setMensaje(`Por ${totalDiasTrabajadosPorMes} ${diasMessage} del Mes.`);
       }
     }
   }, [
@@ -110,7 +112,8 @@ export const SalarioProporcional = ({
     modalidadDePago,
   ]);
 
-  const salarioPropResultado = ParseFloatToTwoDecimals(salarioPropContext);
+  const salarioPropResultado =
+    "$" + ParseFloatToTwoDecimals(salarioPropContext) + ".";
 
   return (
     <div>

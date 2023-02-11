@@ -1,11 +1,11 @@
-import { useStepper } from "../../../../../helper/Context";
-import { InputAguinaldo } from "../../Aguinaldo/AguinaldoInput";
-import Calendar from "../../Calendar/Calendar";
-import { Extrito } from "../../Extras/Extrito";
-import { InputFondoDeAhorro } from "../../FondoDeAhorro/InputFondoDeAhorro";
-import { InputSalarioFinalComponent } from "../../Salario/Inputs/InputSalarioFinalComponent";
-import { InputVacations } from "../../Vacaciones/InputVacations";
-import { CompilerResults } from "./CompilerResult";
+import { useStepper } from "../../../../../../helper/Context";
+import { InputAguinaldo } from "../../../Aguinaldo/AguinaldoInput";
+import Calendar from "../../../Calendar/Calendar";
+import { Extrito } from "../../../Extras/Extrito";
+import { InputFondoDeAhorro } from "../../../FondoDeAhorro/InputFondoDeAhorro";
+import { InputSalarioFinalComponent } from "../../../Salario/Inputs/InputSalarioFinalComponent";
+import { InputVacations } from "../../../Vacaciones/InputVacations";
+import { CompilerResults } from "../CompilerResult/CompilerResult";
 
 export const CompilerStepsAndResults = ({
   ultimoDiaPorMes,

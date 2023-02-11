@@ -6,17 +6,18 @@ import {
   useSegundaFecha,
   usePrimaDeAntiguedad,
 } from "../../../../helper/Context";
+import { ParseFloatToTwoDecimals } from "../../../../Utilities/Utilities";
 
 export const PrimaDeAntiguedadOperations = ({ años, meses, dias }: any) => {
   const { primeraFechaContext } = usePrimeraFecha();
   const { segundaFechaContext } = useSegundaFecha();
   const { SCD } = useSCD();
   const { totalDineroPrima, setTotalDineroPrima } = usePrimaDeAntiguedad();
-  const [mensaje, setMensaje] = useState<any>();
-
-  let show: boolean = false;
 
   let SCDTopado: number;
+  let mensaje: string = " Prima de Antiguedad no aplicable (Menos de 15 años).";
+  const totalDiasPrima = años * 12 + meses * 1 + dias * 0.033;
+  const resultadoTotalDineroPrima = ParseFloatToTwoDecimals(totalDineroPrima);
 
   if (SCD <= 125) {
     SCDTopado = 125;
@@ -26,31 +27,16 @@ export const PrimaDeAntiguedadOperations = ({ años, meses, dias }: any) => {
     SCDTopado = SCD;
   }
 
-  const totalDiasPrima = años * 12 + meses * 1 + dias * 0.033;
   useEffect(() => {
-    if (años >= 15) {
-      setTotalDineroPrima(totalDiasPrima * SCDTopado);
-      setMensaje(
-        ` La relación laboral duró más de 15 años y equivale a ${totalDiasPrima} Días y correponde a $${totalDineroPrima} de pago de Prima de Antiguedad.`
-      );
-    } else {
-      setMensaje(" Menos de 15 años.");
-    }
-  }, [totalDiasPrima]);
+    setTotalDineroPrima(totalDiasPrima * SCDTopado);
+  }, [primeraFechaContext, segundaFechaContext, SCD]);
 
-  if (primeraFechaContext && segundaFechaContext && SCD) {
-    show = true;
-  } else {
-    show = false;
+  if (años >= 15) {
+    mensaje = ` La relación laboral duró más de 15 años y equivale a ${totalDiasPrima} Días y correponde a $${resultadoTotalDineroPrima} de pago de Prima de Antiguedad.`;
   }
 
   // const primeraFechaResult = primeraFechaMoment.format("MMMM Do YYYY");
   // const segundaFechaResult = segundaFechaMoment.format("MMMM Do YYYY");
 
-  return (
-    <div>
-      Prima de Antiguedad:
-      {show ? mensaje : null}
-    </div>
-  );
+  return <div>{mensaje}</div>;
 };

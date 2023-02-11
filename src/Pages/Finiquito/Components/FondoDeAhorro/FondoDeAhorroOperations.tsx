@@ -5,11 +5,15 @@ import {
   useSegundaFecha,
 } from "../../../../helper/Context";
 import { ParseFloatToTwoDecimals } from "../../../../Utilities/Utilities";
-import { useEffect } from "react";
-import { NovToNov } from "./Utilities";
+import { useEffect, useState } from "react";
+import { DecToDec } from "./Utilities";
 
 export const FondoDeAhorroMessage = ({ diasAlAñoSegundaFecha }: any) => {
-  const { salarioContext } = useSCD();
+  const {
+    salarioContext,
+    salarioRestanteFondoDeAhorro,
+    setSalarioRestanteFondoDeAhorro,
+  } = useSCD();
   const { primeraFechaContext } = usePrimeraFecha();
   const { segundaFechaContext } = useSegundaFecha();
   const {
@@ -19,37 +23,30 @@ export const FondoDeAhorroMessage = ({ diasAlAñoSegundaFecha }: any) => {
     booleanFA,
   } = useFondoDeAhorro();
 
-  const totalDiasFondoDeAhorro: number = NovToNov();
+  const totalDiasFondoDeAhorro: number = DecToDec();
 
-  let fondoDeAhorroMensual: number | undefined;
-  let fondoDeAhorroAnual: any;
-  let fondoDeAhorroRestante: string;
-  let resultadoFondoDeAhorroAnual: string;
-  let mensaje: string | undefined;
+  const fondoDeAhorroMensual: number | undefined =
+    salarioContext * fondoDeAhorroPorcentaje * 2;
+  const fondoDeAhorroAnual: number = fondoDeAhorroMensual * 12;
 
-  if (
-    salarioContext &&
-    fondoDeAhorroPorcentaje &&
-    primeraFechaContext &&
-    segundaFechaContext &&
-    booleanFA
-  ) {
-    fondoDeAhorroMensual = salarioContext * fondoDeAhorroPorcentaje * 2;
+  const resultadoFondoDeAhorroAnual: string =
+    ParseFloatToTwoDecimals(fondoDeAhorroAnual);
 
-    fondoDeAhorroAnual = fondoDeAhorroMensual * 12;
+  const resultadoFondoDeAhorroProporcional = ParseFloatToTwoDecimals(
+    fondoDeAhorroProporcional
+  );
 
-    resultadoFondoDeAhorroAnual = ParseFloatToTwoDecimals(fondoDeAhorroAnual);
+  //!const FAProporciona = fondoDeAhorroAnual / diasAlAñoSegundaFecha;
 
-    fondoDeAhorroRestante = ParseFloatToTwoDecimals(
-      salarioContext - salarioContext * fondoDeAhorroPorcentaje
-    );
-
-    const resultadoFondoDeAhorroProporcional = ParseFloatToTwoDecimals(
-      fondoDeAhorroProporcional
-    );
-    mensaje = ` Total Fondo de Ahorro al Año: $${resultadoFondoDeAhorroAnual}. Salario Restante al Mes: $${fondoDeAhorroRestante}.
-      Proporcional: $${resultadoFondoDeAhorroProporcional} por ${totalDiasFondoDeAhorro} días trabajados.`;
-  }
+  useEffect(() => {
+    if (fondoDeAhorroPorcentaje > 0) {
+      setSalarioRestanteFondoDeAhorro(
+        ParseFloatToTwoDecimals(
+          salarioContext - salarioContext * fondoDeAhorroPorcentaje
+        )
+      );
+    }
+  }, [fondoDeAhorroPorcentaje, booleanFA]);
 
   useEffect(() => {
     if (booleanFA && fondoDeAhorroAnual) {
@@ -67,9 +64,23 @@ export const FondoDeAhorroMessage = ({ diasAlAñoSegundaFecha }: any) => {
     fondoDeAhorroPorcentaje,
   ]);
 
+  const notApplicableMessage: string | undefined =
+    "Fondo de Ahorro no aplicable.";
+
   return (
     <div>
-      <p>{mensaje}</p>
+      {fondoDeAhorroPorcentaje ? (
+        <div>
+          <p>Total Fondo de Ahorro al Año: ${resultadoFondoDeAhorroAnual}.</p>
+          <p>
+            Monto de Fondo de Ahorro Proporcional: $
+            {resultadoFondoDeAhorroProporcional}.
+          </p>
+          <p>Por {totalDiasFondoDeAhorro} DÍA de Fondo de Ahorro.</p>
+        </div>
+      ) : (
+        <p>{notApplicableMessage}</p>
+      )}
     </div>
   );
 };

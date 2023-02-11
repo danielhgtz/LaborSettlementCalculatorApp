@@ -155,6 +155,16 @@ export const DiasTrabajadosUltimoAño = () => {
   return diasTrabajadosUltimoAño;
 };
 
+export const ParseFloatTwoDecimalsNumber = (x: number) => {
+  const formatter = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  const num = formatter.format(x);
+  return parseFloat(num);
+};
+
 export const ParseFloatToTwoDecimals = (x: any) => {
   let number = Number.parseFloat(x).toFixed(2);
   return Number(number).toLocaleString("es-MX");
