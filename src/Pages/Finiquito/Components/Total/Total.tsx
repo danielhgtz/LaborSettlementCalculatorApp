@@ -49,7 +49,7 @@ export const Total = () => {
 
   return (
     <div>
-      <h1 className="totalAmount"> $ {resultadoTotal}</h1>
+      <h1 className="totalAmount"> ${resultadoTotal}</h1>
     </div>
   );
 };

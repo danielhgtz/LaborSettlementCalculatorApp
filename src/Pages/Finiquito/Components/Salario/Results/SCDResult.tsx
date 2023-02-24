@@ -13,10 +13,10 @@ export const SCDResult = () => {
 
   useEffect(() => {
     if (booleanFA === true && fondoDeAhorroPorcentaje > 0) {
-      setMensajeSalario("Salario total F.A.*: ");
+      setMensajeSalario("Salario Mensual Total F.A.*: ");
       setCantidadSalario("$" + salarioRestanteFondoDeAhorro + ".");
     } else {
-      setMensajeSalario("Salario total: ");
+      setMensajeSalario("Salario Mensual total: ");
       setCantidadSalario("$" + ParseFloatToTwoDecimals(salarioContext) + ".");
     }
   }, [fondoDeAhorroPorcentaje, booleanFA, salarioRestanteFondoDeAhorro]);

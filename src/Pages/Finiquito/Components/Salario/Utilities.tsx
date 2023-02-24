@@ -9,14 +9,8 @@ export const DiasTrabajadosMesFunction = ({
   primerDia,
   ultimoDia,
   diferenciaDiasUltimoPrimerDia,
-  diasTrabajadosMensuales,
 }: any) => {
-  if (
-    difAños === 0 &&
-    primerMes === 0 &&
-    segundoMes === 0 &&
-    ultimoDia >= primerDia
-  ) {
+  if (difAños === 0 && primerMes === segundoMes && ultimoDia >= primerDia) {
     return diferenciaDiasUltimoPrimerDia + 1;
   } else if (
     primerDia > ultimoDia ||
@@ -24,9 +18,9 @@ export const DiasTrabajadosMesFunction = ({
     (difAños < 0 && primerMes > segundoMes) ||
     (difAños < 0 && primerDia > ultimoDia)
   ) {
-    return 0;
+    return ultimoDia; //!
   } else {
-    return diasTrabajadosMensuales;
+    return ultimoDia;
   }
 };
 
@@ -81,13 +75,13 @@ export const DiasTrabajadosSemanalesFunction = ({
 export const DiasFunction = ({
   diasTrabajadosQuincena,
   diasTrabajadosSemanales,
-  diasTrabajadosMensuales,
+  ultimoDia,
 }: any) => {
   let messageDia: string;
   if (
     diasTrabajadosQuincena === 1 ||
     diasTrabajadosSemanales === 1 ||
-    diasTrabajadosMensuales === 1
+    ultimoDia === 1
   ) {
     messageDia = "Día Trabajado";
   } else {

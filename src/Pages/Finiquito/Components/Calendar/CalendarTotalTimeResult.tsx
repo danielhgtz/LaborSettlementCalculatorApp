@@ -1,7 +1,7 @@
-import React from "react";
 import { usePrimeraFecha, useSegundaFecha } from "../../../../helper/Context";
+import "./Calendar.css";
 
-export const CalendarTotalTime = ({ años, meses, dias }: any) => {
+export const CalendarTotalTimeResult = ({ años, meses, dias }: any) => {
   const { primeraFechaContext } = usePrimeraFecha();
   const { segundaFechaContext } = useSegundaFecha();
   let calendarTotalTime;
@@ -33,7 +33,9 @@ export const CalendarTotalTime = ({ años, meses, dias }: any) => {
 
   return (
     <div>
-      <p>{calendarTotalTime}</p>
+      <p>
+        <strong>{calendarTotalTime}</strong>
+      </p>
     </div>
   );
 };

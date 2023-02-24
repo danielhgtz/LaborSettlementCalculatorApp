@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useStepper } from "../../../../../helper/Context";
 import { StepperItems } from "../../Stepper/Stepper/StepperItems";
+import { MaxNumberFX } from "../../Stepper/Stepper/Utilities";
+import { Total } from "../../Total/Total";
 import "./TituloSecundario.css";
 
 export const TituloSecundario = () => {
-  const { number } = useStepper();
+  const { number, maxNumber } = useStepper();
   const [titulo, setTitulo] = useState<string>(StepperItems()[0].title);
+  const [showResults, setShowResults] = useState<boolean>(false);
 
   const titleDeclaration = StepperItems()[number].title;
 
@@ -15,11 +18,18 @@ export const TituloSecundario = () => {
     } else {
       setTitulo("error");
     }
+    if (number === MaxNumberFX()) {
+      setShowResults(true);
+    } else {
+      setShowResults(false);
+    }
   }, [number]);
 
   return (
     <div>
-      <h1 className="tituloSecundario">{titulo}</h1>
+      <h1 className="tituloSecundario">
+        {titulo} {showResults ? <Total /> : null}
+      </h1>
     </div>
   );
 };

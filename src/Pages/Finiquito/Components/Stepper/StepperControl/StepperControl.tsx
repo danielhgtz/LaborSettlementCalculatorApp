@@ -12,9 +12,10 @@ import { LeftCircleTwoTone, RightCircleTwoTone } from "@ant-design/icons";
 import { Button } from "antd";
 import "./StepperControl.css";
 import { FirstStepCheck } from "./Utilities";
+import { MaxNumberFX } from "../Stepper/Utilities";
 
 export const StepperControl = () => {
-  const { number, setNumber, maxNumber } = useStepper();
+  const { number, setNumber } = useStepper();
   const [leftButtonBoolean, setLeftButtonBoolean] = useState<boolean>(false);
   const [rightButtonBoolean, setRightButtonBoolean] = useState<boolean>(false);
   const { salarioContext } = useSCD();
@@ -34,12 +35,12 @@ export const StepperControl = () => {
   };
 
   const onclickSum = () => {
-    if (number !== maxNumber) {
+    if (number !== MaxNumberFX()) {
       setNumber(number + 1);
 
       return number;
     } else {
-      return maxNumber;
+      return MaxNumberFX();
     }
   };
 
@@ -75,7 +76,7 @@ export const StepperControl = () => {
     } else if (number === 4 || number === 5) {
       setRightButtonBoolean(true);
       setLeftButtonBoolean(true);
-    } else if (number === maxNumber) {
+    } else if (number === MaxNumberFX()) {
       setRightButtonBoolean(false);
       setLeftButtonBoolean(true);
     }

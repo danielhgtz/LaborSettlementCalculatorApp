@@ -1,12 +1,13 @@
-import React from "react";
-import { AguinaldoOperations } from "../../../Aguinaldo/AguinaldoOperations";
-import { CalendarTotalTime } from "../../../Calendar/CalendarTotalTime";
-import { FondoDeAhorroMessage } from "../../../FondoDeAhorro/FondoDeAhorroOperations";
-import { PrimaDeAntiguedadOperations } from "../../../PrimaDeAntiguedad/PrimaDeAntiguedadOperaciones";
-import { SalarioProporcional } from "../../../Salario/Results/SalarioProporcional";
+import { CalendarTotalTimeResult } from "../../../Calendar/CalendarTotalTimeResult";
 import { SCDResult } from "../../../Salario/Results/SCDResult";
+import { SalarioProporcionalResult } from "../../../Salario/Results/SalarioProporcionalResult";
+import { VacationsResult } from "../../../Vacaciones/VacationsResult";
+import { AguinaldoResults } from "../../../Aguinaldo/AguinaldoResults";
+import { PrimaDeAntiguedadResults } from "../../../PrimaDeAntiguedad/PrimaDeAntiguedadResults";
+import { FondoDeAhorroResults } from "../../../FondoDeAhorro/FondoDeAhorroResults";
+
 import { Total } from "../../../Total/Total";
-import { VacationOperations } from "../../../Vacaciones/VacationOperations";
+
 import "./CompilerResult.css";
 
 import calendar from "../../../../../../Assets/img/calendar.png";
@@ -45,7 +46,11 @@ export const CompilerResults = ({
                 <p className="title">Duración de la Relación Laboral</p>
 
                 <div className="results">
-                  <CalendarTotalTime años={años} meses={meses} dias={dias} />
+                  <CalendarTotalTimeResult
+                    años={años}
+                    meses={meses}
+                    dias={dias}
+                  />
                 </div>
               </div>
             </div>
@@ -57,7 +62,7 @@ export const CompilerResults = ({
 
                 <div className="results">
                   <SCDResult />
-                  <SalarioProporcional
+                  <SalarioProporcionalResult
                     primerDia={primerDia}
                     primerAño={primerAño}
                     ultimoAño={ultimoAño}
@@ -76,7 +81,7 @@ export const CompilerResults = ({
                 <p className="title">Vacaciones</p>
 
                 <div className="results">
-                  <VacationOperations
+                  <VacationsResult
                     segundaFecha={segundaFecha}
                     diasAlAñoSegundaFecha={diasAlAñoSegundaFecha}
                     diasTrabajadosUltimoAño={diasTrabajadosUltimoAño}
@@ -92,7 +97,7 @@ export const CompilerResults = ({
                 <p className="title">Aguinaldo</p>
 
                 <div className="results">
-                  <AguinaldoOperations
+                  <AguinaldoResults
                     diasTrabajadosUltimoAño={diasTrabajadosUltimoAño}
                     diasAlAñoSegundaFecha={diasAlAñoSegundaFecha}
                   />
@@ -105,7 +110,7 @@ export const CompilerResults = ({
                 <p className="title">Prima de Antiguedad</p>
 
                 <div className="results">
-                  <PrimaDeAntiguedadOperations
+                  <PrimaDeAntiguedadResults
                     años={años}
                     meses={meses}
                     dias={dias}
@@ -120,7 +125,7 @@ export const CompilerResults = ({
                 <p className="title">Fondo de Ahorro</p>
 
                 <div className="results">
-                  <FondoDeAhorroMessage
+                  <FondoDeAhorroResults
                     diasAlAñoSegundaFecha={diasAlAñoSegundaFecha}
                   />
                 </div>

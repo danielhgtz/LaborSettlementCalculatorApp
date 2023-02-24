@@ -1,6 +1,7 @@
 .siteTitle {
   color: white;
   font-size: 25px;
+  cursor: pointer;
 }
 
 * {
@@ -23,8 +24,8 @@ nav {
   gap: 2rem;
   padding: 0 1rem;
   align-items: stretch;
-  position: fixed;
-  z-index: 2;
+
+  z-index: 3;
 }
 
 nav a {
@@ -47,6 +48,7 @@ nav ul {
 nav li.active {
   font-weight: bold;
   font-size: 20px;
+  cursor: pointer;
 }
 
 nav li:hover {

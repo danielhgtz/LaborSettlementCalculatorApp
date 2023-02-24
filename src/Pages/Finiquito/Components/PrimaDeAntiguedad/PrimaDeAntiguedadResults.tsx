@@ -8,14 +8,15 @@ import {
 } from "../../../../helper/Context";
 import { ParseFloatToTwoDecimals } from "../../../../Utilities/Utilities";
 
-export const PrimaDeAntiguedadOperations = ({ años, meses, dias }: any) => {
+export const PrimaDeAntiguedadResults = ({ años, meses, dias }: any) => {
   const { primeraFechaContext } = usePrimeraFecha();
   const { segundaFechaContext } = useSegundaFecha();
   const { SCD } = useSCD();
   const { totalDineroPrima, setTotalDineroPrima } = usePrimaDeAntiguedad();
+  const [primaDeAntiguedadBoolean, setPrimaDeAntiguedadBoolean] =
+    useState(false);
 
   let SCDTopado: number;
-  let mensaje: string = " Prima de Antiguedad no aplicable (Menos de 15 años).";
   const totalDiasPrima = años * 12 + meses * 1 + dias * 0.033;
   const resultadoTotalDineroPrima = ParseFloatToTwoDecimals(totalDineroPrima);
 
@@ -29,14 +30,26 @@ export const PrimaDeAntiguedadOperations = ({ años, meses, dias }: any) => {
 
   useEffect(() => {
     setTotalDineroPrima(totalDiasPrima * SCDTopado);
-  }, [primeraFechaContext, segundaFechaContext, SCD]);
 
-  if (años >= 15) {
-    mensaje = ` La relación laboral duró más de 15 años y equivale a ${totalDiasPrima} Días y correponde a $${resultadoTotalDineroPrima} de pago de Prima de Antiguedad.`;
-  }
+    if (años >= 15) {
+      setPrimaDeAntiguedadBoolean(true);
+    }
+  }, [primeraFechaContext, segundaFechaContext, SCD, años]);
 
   // const primeraFechaResult = primeraFechaMoment.format("MMMM Do YYYY");
   // const segundaFechaResult = segundaFechaMoment.format("MMMM Do YYYY");
 
-  return <div>{mensaje}</div>;
+  return (
+    <div>
+      {primaDeAntiguedadBoolean ? (
+        <p>
+          La relación laboral duró más de 15 años y equivale a {totalDiasPrima}{" "}
+          Días y correponde a <strong>${resultadoTotalDineroPrima}</strong> de
+          pago de Prima de Antiguedad.
+        </p>
+      ) : (
+        <p>Prima de Antiguedad no aplicable (Menos de 15 años).</p>
+      )}
+    </div>
+  );
 };

@@ -39,3 +39,11 @@ export const FondoDeAhorroMensualFx = (fondoDeAhorroPorcentaje: number) => {
   const { salarioContext } = useSCD();
   return salarioContext * fondoDeAhorroPorcentaje * 2;
 };
+
+export const DiasMessage = () => {
+  let diaMessage: string = "Días";
+  if (DecToDec() === 1) {
+    diaMessage = "Día";
+  }
+  return diaMessage;
+};

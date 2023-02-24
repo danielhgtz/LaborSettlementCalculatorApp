@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useStepper } from "../../../../../helper/Context";
-
 export const StepperItems = () => {
-  const { setMaxNumber } = useStepper();
   const stepperItems = [
     { title: "Salario" },
     {
@@ -16,12 +12,8 @@ export const StepperItems = () => {
     },
     { title: "Fondo de Ahorro" },
     { title: "Prestaciones Extras" },
-    { title: "Resultados" },
+    { title: "Resultados: " },
   ];
-
-  useEffect(() => {
-    setMaxNumber(stepperItems.length - 1);
-  }, [stepperItems]);
 
   return stepperItems;
 };

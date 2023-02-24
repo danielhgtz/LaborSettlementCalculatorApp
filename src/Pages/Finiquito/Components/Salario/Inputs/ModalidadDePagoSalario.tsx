@@ -24,12 +24,6 @@ export const ModalidadDePagoComponent = ({ ultimoDiaPorMes }: Props) => {
     }
   };
 
-  useEffect(() => {
-    if (seleccion === "mes" && segundaFechaContext) {
-      setModalidadDePago(ultimoDiaPorMes);
-    }
-  }, [seleccion, segundaFechaContext]);
-
   return (
     <div>
       <Radio.Group

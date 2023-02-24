@@ -10,7 +10,7 @@ import {
   ParseFloatTwoDecimalsNumber,
 } from "../../../../Utilities/Utilities";
 
-export const AguinaldoOperations = ({
+export const AguinaldoResults = ({
   diasTrabajadosUltimoAño,
   diasAlAñoSegundaFecha,
 }: any) => {
@@ -62,7 +62,10 @@ export const AguinaldoOperations = ({
       <p>
         Días de Aguinaldo Proporcional: {resultadoDiasAguinaldoProporcional}.
       </p>
-      <p>Monto de Aguinaldo Proporcional: ${resultadoAguinaldoProporcional}.</p>
+      <p>
+        Monto de Aguinaldo Proporcional:{" "}
+        <strong>${resultadoAguinaldoProporcional}</strong>.
+      </p>
     </div>
   );
 };

@@ -13,6 +13,7 @@ import {
   DiasTrabajadosMesFunction,
   DiasTrabajadosSemanalesFunction,
 } from "../Utilities";
+import "./SalarioResults.css";
 
 type Props = {
   primerDia: any;
@@ -23,7 +24,7 @@ type Props = {
   primeraFecha: any;
   segundaFecha: any;
 };
-export const SalarioProporcional = ({
+export const SalarioProporcionalResult = ({
   primerDia,
   primerAño,
   ultimoAño,
@@ -61,6 +62,7 @@ export const SalarioProporcional = ({
   );
 
   const totalDiasTrabajadosPorMes = DiasTrabajadosMesFunction({
+    //!
     primerDia,
     ultimoDia,
     primerMes,
@@ -86,21 +88,33 @@ export const SalarioProporcional = ({
     diasTrabajadosMensuales,
   });
 
+  console.log(diasTrabajadosMensuales);
+
+  ///primerDia = 31
+  ///ultimoDia = 2 //?
+
+  // difAños === 0 &&
+  // primerMes === 0 &&
+  // segundoMes === 0 &&
+  // ultimoDia >= primerDia
+
   useEffect(() => {
     if (segundaFechaContext && salarioContext) {
       if (modalidadDePago === 15) {
+        console.log("a");
         setSalarioPropContext(diasTrabajadosQuincena * SCD);
-        setMensaje(
-          `Por ${diasTrabajadosQuincena} ${diasMessage} de la Quincena.`
-        );
+        setMensaje(`${diasTrabajadosQuincena} ${diasMessage} de la Quincena.`);
       } else if (modalidadDePago === 7) {
+        console.log("b");
         setSalarioPropContext(totalDiasTrabajadosPorSemana * SCD);
         setMensaje(
-          `Por ${totalDiasTrabajadosPorSemana} ${diasMessage} de la Semana.`
+          `${totalDiasTrabajadosPorSemana} ${diasMessage} de la Semana.`
         );
-      } else if (modalidadDePago === ultimoDiaPorMes) {
+      } else if (modalidadDePago === 30) {
+        //!
+        console.log("c");
         setSalarioPropContext(totalDiasTrabajadosPorMes * SCD);
-        setMensaje(`Por ${totalDiasTrabajadosPorMes} ${diasMessage} del Mes.`);
+        setMensaje(`${totalDiasTrabajadosPorMes} ${diasMessage} del Mes.`);
       }
     }
   }, [
@@ -113,12 +127,15 @@ export const SalarioProporcional = ({
   ]);
 
   const salarioPropResultado =
-    "$" + ParseFloatToTwoDecimals(salarioPropContext) + ".";
+    "$" + ParseFloatToTwoDecimals(salarioPropContext);
 
   return (
     <div>
-      <p>Salario Proporcional: {salarioPropResultado}</p>
       <p>{mensaje}</p>
+
+      <p>
+        Salario Proporcional: <strong>{salarioPropResultado}</strong>.
+      </p>
     </div>
   );
 };

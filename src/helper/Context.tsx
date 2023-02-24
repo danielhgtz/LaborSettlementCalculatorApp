@@ -315,7 +315,6 @@ export const StepperContext = createContext({
   number: 0,
   setNumber: (e: number) => {},
   maxNumber: 0,
-  setMaxNumber: (e: number) => {},
 });
 // hook
 export const useStepper = () => useContext(StepperContext);
@@ -323,13 +322,31 @@ export const useStepper = () => useContext(StepperContext);
 // provider
 export const StepperContextProvider = ({ children }: any) => {
   const [number, setNumber] = useState<number>(0);
-  const [maxNumber, setMaxNumber] = useState<number>(0);
+  const [maxNumber] = useState<number>(0);
 
   return (
-    <StepperContext.Provider
-      value={{ number, setNumber, maxNumber, setMaxNumber }}
-    >
+    <StepperContext.Provider value={{ number, setNumber, maxNumber }}>
       {children}
     </StepperContext.Provider>
+  );
+};
+
+//////////////////////////////////////////////////
+
+export const IsLoggedContext = createContext({
+  isLogged: false,
+  setIsLogged: (e: boolean) => {},
+});
+// hook
+export const useIsLogged = () => useContext(IsLoggedContext);
+
+// provider
+export const IsLoggedContextProvider = ({ children }: any) => {
+  const [isLogged, setIsLogged] = useState<boolean>(false);
+
+  return (
+    <IsLoggedContext.Provider value={{ isLogged, setIsLogged }}>
+      {children}
+    </IsLoggedContext.Provider>
   );
 };

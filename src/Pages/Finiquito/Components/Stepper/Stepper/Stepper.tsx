@@ -9,9 +9,6 @@ export const Stepper = () => {
 
   return (
     <div>
-      <div>
-        <h2 className="stepperTitle">STEPS:</h2>
-      </div>
       <div className="stepperSteps">
         <Steps current={number} items={StepperItems()} />
       </div>

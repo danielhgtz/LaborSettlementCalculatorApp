@@ -9,8 +9,9 @@ import {
   ParseFloatTwoDecimalsNumber,
   ParseFloatToTwoDecimals,
 } from "../../../../Utilities/Utilities";
+import "./InputVacations.css";
 
-export const VacationOperations = ({
+export const VacationsResult = ({
   diasAlAñoSegundaFecha,
   diasTrabajadosUltimoAño,
 }: any) => {
@@ -64,10 +65,13 @@ export const VacationOperations = ({
         Días de Vacaciones Proporcionales: {diasDeVacacionesProporcionales}.
       </p>
       <p>
-        Monto de Vacaciones Proporcionales: ${resultadoVacacionesProporcionales}
-        .
+        Monto de Vacaciones Proporcionales:
+        <strong> ${resultadoVacacionesProporcionales}</strong>.
       </p>
-      <p>Prima Vacacional: ${resultadoPrimaVacacional}.</p>
+
+      <p>
+        Prima Vacacional: <strong>${resultadoPrimaVacacional}</strong>.
+      </p>
     </div>
   );
 };
