@@ -9,16 +9,29 @@ import {
   FondoDeAhorroContextProvider,
   ExtrasProvider,
   StepperContextProvider,
+  useIsLogged,
 } from "../../helper/Context";
 
 import "./LaborSettlementCalculator.css";
 import { NavBar } from "../../Components/Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function LaborSettlementCalculator() {
+  const { isLogged } = useIsLogged();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLogged === false) {
+      navigate("../", { replace: true });
+    } else {
+      console.log("loggeado");
+    }
+  }, [isLogged]);
+
   return (
     <div>
       <NavBar />
-
       <StepperContextProvider>
         <PrimeraFechaContextProvider>
           <SegundaFechaContextProvider>
